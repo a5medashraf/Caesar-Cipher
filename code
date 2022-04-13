@@ -1,0 +1,61 @@
+# encryption function
+def encrypt(text, s):
+    result = ""
+    for i in range(len(text)):
+        char = text[i]
+        # Encrypt numbers
+        if char in ("0123456789"):
+            numb = int(char)
+            symb = chr(numb + 35)
+            result = result + symb
+            # Encrypt spaces
+        elif char == " ":
+            result = result + "?"
+        # Encrypt uppercase characters
+        elif (char.isupper()):
+            x = ord(char) + s
+            while x > 90:
+                x = x - 26
+            x = chr(x)
+            result = result + x
+        # Encrypt lowercase characters
+        else:
+            x = ord(char) + s
+            while x > 122:
+                x = x - 26
+            x = chr(x)
+            result = result + x
+    return result
+
+# -------------------------------------------------------------------------------
+# decryption function
+def decrypt(text, s):
+    result = ""
+    for i in range(len(text)):
+        char = text[i]
+        # decrypt numbers
+        if char in ("#$%&'()*+,"):
+            numb = ord(char) - 35
+            numb = str(numb)
+            result = result + numb
+            # decrypt spaces
+        elif char == '?':
+            result = result + " "
+        # decrypt uppercase characters
+        elif (char.isupper()):
+            x = ord(char) - s
+            while x < 65:
+                x = x + 26
+            x = chr(x)
+            result = result + x
+            # decrypt lowercase characters
+        else:
+            x = ord(char) - s
+            while x < 97:
+                x = x + 26
+            x = chr(x)
+            result = result + x
+    return result
+
+print(encrypt('ahmed', 3))
+print(decrypt('dkphg', 3))
